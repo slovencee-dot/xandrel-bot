@@ -819,11 +819,20 @@ async def hesaplama(ctx):
     await ctx.send(embed=embed, view=UrunSelectView())
 
 # ================== BOT ÇALIŞTIR ==================
-TOKEN = os.getenv("TOKEN")  # burası .env’den token’ı alacak
-client = discord.Client()
+
+intents = discord.Intents.default()  # temel izinler
+intents.message_content = True       # mesajları okumak için gerekli
+
+TOKEN = os.getenv("TOKEN")
+client = discord.Client(intents=intents)  # intents ekledik
 
 @client.event
 async def on_ready():
     print(f'{client.user} online!')
+
+client.run(TOKEN)
+async def on_ready():
+    print(f'{client.user} online!')
+
 
 client.run(TOKEN)  # buraya direkt token yazma
